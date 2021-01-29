@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
 
@@ -10,6 +12,7 @@ const io = require('socket.io')(httpServer, {
 })
 
 const users = []
+const port = process.env.PORT
 
 app.get('/users', (req, res) => {
   res.json({
@@ -31,6 +34,6 @@ io.on('connection', socket => {
   })
 })
 
-httpServer.listen(3000, () => {
-  console.log('Servidor rodando em: http://localhost:3000')
+httpServer.listen(port, () => {
+  console.log(`Server is running: http://localhost:${port}`)
 })
